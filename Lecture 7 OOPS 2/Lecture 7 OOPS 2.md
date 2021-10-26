@@ -1,70 +1,66 @@
-# OOPS 2
+## Constant Functions
+Object can be made constant. Thne no changes permitted.
+
 ```cpp
-class Student {
-    int age;
-    char *name;
+Fraction f1(10, 13); // not const
+Fraction const f2(10/17);
+```
 
-    public:
-    Student(int age, char *name) {
-        this->age = age;
-        this->name = name;
-    }
++ Getter Functions allowed
+    + only if the function is marked as `const`
++ Setter Functions not allowed
 
-    void display() {
-        cout<<name<<" "<<age<<endl;
-    }
+### Constant Functions
+Which doesnt change any property of current object.
+```cpp
+int getNumerator() const {
+    return numerator;
 }
 ```
-## Shallow copy and deep copy
-### Shallow copy
-Copying of just the address of the object. For example in case of an array, only the address of 0th index is bing copied.
 
-### Deep Copy
-Copying of actual object, not just a pointer to it's location in memory.
-
-## Copy Constructor
-```cpp
-class Student {
-    int age; 
-    char* name;
-    public:
-    Student(int age, char* name) {
-        this-> age = age;
-        // shallow copy
-        // this-> name = name;
-
-        // deep copy
-        this-> name = new char[strlen(name)+1];
-        strcpy(this->name, name);
-    }
-
-    // copy constructor
-    Student(Student const &s) {
-        this-> age = s.age;
-        // this-> name = s.name; -> shallow copy
-
-        // Deep Copy
-        this->name = new char[strlen(s.name)+1];
-        strcpy(this->name, name);
-    }
-
-    void display() {
-        cout<<name<<" "<<age<<endl;
-    }
-};
-```
-
-## Initialisation List
-Used to allocate memory to the const variables and reference variables.
+## Static Members
+Belongs to a class, but not to a object.
 ```cpp
 class Student {
 public:
+    int rollNumber;
     int age;
-    const int rollNumber;
 
-    // initialisation list
-    Student(int r) : rollNumber(r) {
-        // rollNumber = r;
+    static int totalStudents; // total students
+
+    Student() {
+        totalStudents++;
     }
+};
+```
+To access the static members
++ `::` scope resolution operator.
+```cpp
+Student::totalStudents
+```
+Static properties are inititalised outside the class.
+```cpp
+int Student :: totalStudents = 0;
+```
+### Static Functions
+Functions accessible to whole class
+```cpp
+static int getTotalStduents() {
+    return totalStudents;
 }
 ```
++ Can access only static properties.
++ No access to `this`
+
+## Operator Overloading
+Extend the properties of pre-existing operators to work for the user defined objects.
+### Syntax
+```
+<return_type> operator<type> (<parameters>){
+    // definition
+}
+```
+Full implementation in [FractionClass.cpp](./FractionClass.cpp)
+
+# Dyanamic Array
+No fixed size
