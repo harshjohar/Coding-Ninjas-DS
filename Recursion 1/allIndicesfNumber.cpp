@@ -24,7 +24,7 @@ int allIndexes(int input[], int size, int x, int output[]) {
     int restAns = allIndexes(input+1, size-1, x, output);
 
     if(input[0]==x) {
-        for(int i=restAns-1; i>=0; i++) {
+        for(int i=restAns-1; i>=0; i--) {
             output[i+1] = output[i]+1;
         }
 
@@ -32,7 +32,7 @@ int allIndexes(int input[], int size, int x, int output[]) {
         restAns++;
     }
     else {
-        for(int i=restAns-1; i>=0; i++) {
+        for(int i=restAns-1; i>=0; i--) {
             output[i]++;
         }
     }
